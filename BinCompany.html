@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Outfit', sans-serif; background-color: #0a0a0a; color: #ffffff; }
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .neon-border {
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+            border: 1px solid #3b82f6;
+        }
+        .bento-card:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.06);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <div id="cursor" class="fixed w-4 h-4 bg-blue-500 rounded-full pointer-events-none mix-blend-screen blur-sm z-50"></div>
+
+    <nav class="fixed top-0 w-full z-40 px-6 py-4">
+        <div class="max-w-7xl mx-auto glass rounded-2xl px-6 py-3 flex justify-between items-center">
+            <div class="text-2xl font-bold tracking-tighter text-blue-500">HOOK<span class="text-white">TECH</span></div>
+            <div class="hidden md:flex space-x-8 text-sm font-light uppercase tracking-widest">
+                <a href="#" class="hover:text-blue-400">Services</a>
+                <a href="#" class="hover:text-blue-400">Bin Sizes</a>
+                <a href="#" class="hover:text-blue-400">Booking</a>
+            </div>
+            <button class="neon-border bg-blue-600 px-5 py-2 rounded-lg text-sm font-semibold">Rent a Bin</button>
+        </div>
+    </nav>
+
+    <section class="relative h-screen flex items-center justify-center pt-20 px-6">
+        <div class="absolute inset-0 z-0 overflow-hidden">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-[120px]"></div>
+        </div>
+        
+        <div class="relative z-10 text-center max-w-4xl">
+            <h1 class="text-6xl md:text-8xl font-bold tracking-tight mb-6">
+                HEAVY LIFTING <br/> <span class="text-blue-500 italic">SIMPLIFIED.</span>
+            </h1>
+            <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10">
+                Premium hooklift bin rentals for industrial, commercial, and residential projects. 
+                Seamless delivery, instant booking, and glass-clear pricing.
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <button class="bg-white text-black px-8 py-4 rounded-xl font-bold hover:bg-blue-500 hover:text-white transition-all">View Bin Sizes</button>
+                <button class="glass px-8 py-4 rounded-xl font-bold">Contact Support</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto py-24 px-6">
+        <h2 class="text-3xl font-bold mb-12">Our Solutions</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bento-card glass p-8 rounded-3xl md:col-span-2">
+                <div class="h-40 bg-blue-900/20 rounded-2xl mb-6 flex items-center justify-center">
+                    <span class="text-blue-400 font-mono">INDUSTRIAL_BIN_IMG</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-2">Construction Sites</h3>
+                <p class="text-gray-400">Reinforced steel bins designed for heavy debris and concrete removal.</p>
+            </div>
+            <div class="bento-card glass p-8 rounded-3xl">
+                <h3 class="text-2xl font-bold mb-2">Same Day</h3>
+                <p class="text-gray-400">Order by 9 AM for guaranteed same-day drop-off.</p>
+            </div>
+            <div class="bento-card glass p-8 rounded-3xl">
+                <h3 class="text-2xl font-bold mb-2">Eco Friendly</h3>
+                <p class="text-gray-400">90% of our waste is sorted and recycled at local plants.</p>
+            </div>
+            <div class="bento-card glass p-8 rounded-3xl md:col-span-2">
+                <h3 class="text-2xl font-bold mb-2">The Hooklift Advantage</h3>
+                <p class="text-gray-400">Precision placement in tight spaces where traditional trucks can't reach.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Custom Neon Cursor Logic
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+    </script>
+</body>
+</html>
