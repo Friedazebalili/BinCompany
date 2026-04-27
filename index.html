@@ -1,96 +1,484 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ironclad Bins | Premium Hook Lift Solutions</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        amber: '#f59e0b',
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        body { font-family: 'Outfit', sans-serif; background-color: #0a0a0a; color: #ffffff; }
+        :root {
+            --dark-metal: #111827;
+            --steel: #1f2937;
+            --amber: #f59e0b;
+            --amber-glow: rgba(245, 158, 11, 0.4);
+            --light-gray: #f3f4f6;
+        }
+
+        body {
+            background-color: var(--dark-metal);
+            font-family: 'Inter', sans-serif;
+            color: var(--light-gray);
+            cursor: none !important;
+            overflow-x: hidden;
+        }
+
+        .serif { font-family: 'Merriweather', serif; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--dark-metal); }
+        ::-webkit-scrollbar-thumb { background: var(--steel); border-radius: 10px; border: 1px solid var(--amber); }
+
+        /* Industrial Glassmorphism */
         .glass {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(31, 41, 55, 0.4);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.15);
+            box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.5);
         }
-        .neon-border {
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
-            border: 1px solid #3b82f6;
+
+        /* Abstract Pattern */
+        .topo-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23f59e0b' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+            z-index: -1;
         }
-        .bento-card:hover {
-            transform: translateY(-5px);
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.06);
+
+        /* Custom Cursor */
+        #cursor {
+            width: 14px;
+            height: 14px;
+            background: var(--amber);
+            box-shadow: 0 0 20px 4px var(--amber-glow);
+            transition: transform 0.1s ease;
+        }
+
+        /* Interaction States */
+        .scroll-up { opacity: 0; transform: translateY(40px); }
+        .parallax-bg { transform: scale(1.1); transition: transform 0.1s linear; }
+        
+        .service-card { transition: all 0.4s ease; }
+        .service-card:hover { transform: translateY(-8px); border-color: var(--amber); background: rgba(31, 41, 55, 0.8); }
+        
+        /* Bin Logo Icon */
+        .bin-logo {
+            width: 28px;
+            height: 22px;
+            border: 2px solid var(--amber);
+            position: relative;
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            margin-top: 8px;
+        }
+        .bin-logo::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border: 2px solid var(--amber);
+            border-radius: 50%;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
         }
     </style>
 </head>
-<body class="overflow-x-hidden">
+<body class="selection:bg-amber selection:text-white">
 
-    <div id="cursor" class="fixed w-4 h-4 bg-blue-500 rounded-full pointer-events-none mix-blend-screen blur-sm z-50"></div>
+    <div class="fixed inset-0 z-[-2] bg-gradient-to-br from-[#111827] to-[#030712]"></div>
+    <div class="topo-bg"></div>
 
-    <nav class="fixed top-0 w-full z-40 px-6 py-4">
-        <div class="max-w-7xl mx-auto glass rounded-2xl px-6 py-3 flex justify-between items-center">
-            <div class="text-2xl font-bold tracking-tighter text-blue-500">HOOK<span class="text-white">TECH</span></div>
-            <div class="hidden md:flex space-x-8 text-sm font-light uppercase tracking-widest">
-                <a href="#" class="hover:text-blue-400">Services</a>
-                <a href="#" class="hover:text-blue-400">Bin Sizes</a>
-                <a href="#" class="hover:text-blue-400">Booking</a>
+    <div id="cursor" class="fixed rounded-full pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2"></div>
+    <canvas id="cursor-trail" class="fixed inset-0 pointer-events-none z-[9998]"></canvas>
+
+    <nav class="fixed top-0 w-full z-50 glass py-4 px-6 md:px-12 flex justify-between items-center border-b border-amber/20">
+        <div class="flex items-center gap-4">
+            <div class="bin-logo"></div>
+            <div>
+                <h1 class="text-white uppercase tracking-[0.15em] font-bold text-lg leading-none">Ironclad</h1>
+                <p class="text-[9px] text-amber uppercase tracking-[0.2em] mt-1 font-medium">Hook Lift Bins</p>
             </div>
-            <button class="neon-border bg-blue-600 px-5 py-2 rounded-lg text-sm font-semibold">Rent a Bin</button>
         </div>
+
+        <div class="hidden md:flex gap-8 text-xs uppercase tracking-widest font-medium text-light-gray/80">
+            <a href="#services" class="hover:text-amber transition-colors">Services</a>
+            <a href="#expertise" class="hover:text-amber transition-colors">Why Hook Lifts</a>
+            <a href="#fleet" class="hover:text-amber transition-colors">Bin Sizes</a>
+            <a href="#reviews" class="hover:text-amber transition-colors">Reviews</a>
+        </div>
+
+        <a href="#estimate" class="px-6 py-2.5 bg-amber text-white text-[10px] font-bold uppercase tracking-widest rounded-sm hover:bg-[#d97706] transition-all duration-300 shadow-[0_0_15px_rgba(245,158,11,0.3)]">
+            Book a Bin
+        </a>
     </nav>
 
-    <section class="relative h-screen flex items-center justify-center pt-20 px-6">
-        <div class="absolute inset-0 z-0 overflow-hidden">
-            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-[120px]"></div>
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-[-1]">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#111827] via-[#111827]/70 to-[#111827]/30 z-10"></div>
+            <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&q=80&w=2000" 
+                 class="parallax-bg w-full h-full object-cover opacity-60" alt="Heavy duty construction and waste management">
         </div>
-        
-        <div class="relative z-10 text-center max-w-4xl">
-            <h1 class="text-6xl md:text-8xl font-bold tracking-tight mb-6">
-                HEAVY LIFTING <br/> <span class="text-blue-500 italic">SIMPLIFIED.</span>
-            </h1>
-            <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10">
-                Premium hooklift bin rentals for industrial, commercial, and residential projects. 
-                Seamless delivery, instant booking, and glass-clear pricing.
+
+        <div class="relative z-20 text-center px-4 max-w-4xl mt-20">
+            <span class="hero-anim block text-amber text-xs font-bold uppercase tracking-[0.3em] mb-6 flex items-center justify-center gap-3">
+                <span class="w-8 h-[1px] bg-amber"></span>
+                Heavy-Duty Waste Solutions
+                <span class="w-8 h-[1px] bg-amber"></span>
+            </span>
+            <h2 class="hero-anim serif text-5xl md:text-7xl text-white mb-6 leading-tight drop-shadow-2xl">
+                Industrial Strength. <br> <span class="italic text-amber">Precision Delivery.</span>
+            </h2>
+            <p class="hero-anim text-lg font-light text-light-gray/80 max-w-2xl mx-auto leading-relaxed mb-10">
+                Providing reliable hook lift bins for construction sites, commercial clear outs, and large residential projects. We deliver exactly where you need it.
             </p>
-            <div class="flex flex-col md:flex-row gap-4 justify-center">
-                <button class="bg-white text-black px-8 py-4 rounded-xl font-bold hover:bg-blue-500 hover:text-white transition-all">View Bin Sizes</button>
-                <button class="glass px-8 py-4 rounded-xl font-bold">Contact Support</button>
+            <div class="hero-anim flex flex-col sm:flex-row items-center justify-center gap-6">
+                <a href="#services" class="px-8 py-4 bg-amber text-white text-xs font-bold uppercase tracking-widest rounded-sm hover:bg-[#d97706] transition-all w-full sm:w-auto text-center">
+                    Explore Services
+                </a>
+                <a href="#fleet" class="px-8 py-4 border border-light-gray/30 text-white text-xs font-bold uppercase tracking-widest rounded-sm hover:border-amber hover:text-amber transition-all w-full sm:w-auto text-center">
+                    View Bin Sizes
+                </a>
             </div>
         </div>
     </section>
 
-    <section class="max-w-7xl mx-auto py-24 px-6">
-        <h2 class="text-3xl font-bold mb-12">Our Solutions</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bento-card glass p-8 rounded-3xl md:col-span-2">
-                <div class="h-40 bg-blue-900/20 rounded-2xl mb-6 flex items-center justify-center">
-                    <span class="text-blue-400 font-mono">INDUSTRIAL_BIN_IMG</span>
+    <section id="services" class="py-32 px-6 md:px-12 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20 scroll-up">
+                <span class="text-amber text-[10px] uppercase tracking-widest font-bold block mb-4">What We Do</span>
+                <h3 class="serif text-4xl md:text-5xl text-white">Waste Management Services</h3>
+                <p class="font-light text-light-gray/60 mt-4 max-w-2xl mx-auto">We supply high-capacity bins designed to handle heavy materials securely. Our trucks are built to drop bins in tight spaces safely.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <div class="glass service-card p-8 rounded-xl scroll-up border-t-2 border-t-transparent hover:border-t-amber flex flex-col h-full">
+                    <div class="w-12 h-12 bg-steel border border-amber/30 rounded-lg flex items-center justify-center mb-6 text-amber">
+                        <i data-lucide="hammer" stroke-width="1.5" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="serif text-xl text-white mb-3">Construction Waste</h4>
+                    <p class="font-light text-sm text-light-gray/70 leading-relaxed mb-6 flex-grow">Heavy-duty bins perfect for wood, drywall, roofing materials, and general building debris from active job sites.</p>
+                    <ul class="space-y-2 text-xs font-medium text-light-gray/50">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-amber"></i> High Weight Limits</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-amber"></i> Same Day Swap Outs</li>
+                    </ul>
                 </div>
-                <h3 class="text-2xl font-bold mb-2">Construction Sites</h3>
-                <p class="text-gray-400">Reinforced steel bins designed for heavy debris and concrete removal.</p>
-            </div>
-            <div class="bento-card glass p-8 rounded-3xl">
-                <h3 class="text-2xl font-bold mb-2">Same Day</h3>
-                <p class="text-gray-400">Order by 9 AM for guaranteed same-day drop-off.</p>
-            </div>
-            <div class="bento-card glass p-8 rounded-3xl">
-                <h3 class="text-2xl font-bold mb-2">Eco Friendly</h3>
-                <p class="text-gray-400">90% of our waste is sorted and recycled at local plants.</p>
-            </div>
-            <div class="bento-card glass p-8 rounded-3xl md:col-span-2">
-                <h3 class="text-2xl font-bold mb-2">The Hooklift Advantage</h3>
-                <p class="text-gray-400">Precision placement in tight spaces where traditional trucks can't reach.</p>
+
+                <div class="glass service-card p-8 rounded-xl scroll-up border-t-2 border-t-transparent hover:border-t-amber flex flex-col h-full" style="transition-delay: 100ms;">
+                    <div class="w-12 h-12 bg-steel border border-amber/30 rounded-lg flex items-center justify-center mb-6 text-amber">
+                        <i data-lucide="building-2" stroke-width="1.5" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="serif text-xl text-white mb-3">Commercial Contracts</h4>
+                    <p class="font-light text-sm text-light-gray/70 leading-relaxed mb-6 flex-grow">Ongoing bin rentals for warehouses, factories, and large retail centers that require regular, dependable pick-ups.</p>
+                    <ul class="space-y-2 text-xs font-medium text-light-gray/50">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-amber"></i> Scheduled Collections</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-amber"></i> Dedicated Account Manager</li>
+                    </ul>
+                </div>
+
+                <div class="glass service-card p-8 rounded-xl scroll-up border-t-2 border-t-transparent hover:border-t-amber flex flex-col h-full" style="transition-delay: 200ms;">
+                    <div class="w-12 h-12 bg-steel border border-amber/30 rounded-lg flex items-center justify-center mb-6 text-amber">
+                        <i data-lucide="home" stroke-width="1.5" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="serif text-xl text-white mb-3">Residential Clear Outs</h4>
+                    <p class="font-light text-sm text-light-gray/70 leading-relaxed mb-6 flex-grow">Convenient sizes for home renovations, landscaping overhauls, or moving. We protect your driveway during delivery.</p>
+                    <ul class="space-y-2 text-xs font-medium text-light-gray/50">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-amber"></i> Driveway Protection</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-amber"></i> Easy Loading Doors</li>
+                    </ul>
+                </div>
+
+                <div class="glass service-card p-8 rounded-xl scroll-up border-t-2 border-t-transparent hover:border-t-amber flex flex-col h-full" style="transition-delay: 300ms;">
+                    <div class="w-12 h-12 bg-steel border border-amber/30 rounded-lg flex items-center justify-center mb-6 text-amber">
+                        <i data-lucide="recycle" stroke-width="1.5" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="serif text-xl text-white mb-3">Green Waste & Soil</h4>
+                    <p class="font-light text-sm text-light-gray/70 leading-relaxed mb-6 flex-grow">Specific bins strictly for concrete, dirt, or yard waste. We ensure materials are processed responsibly at local centers.</p>
+                    <ul class="space-y-2 text-xs font-medium text-light-gray/50">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-amber"></i> Concrete Recycling</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-amber"></i> Clean Fill Removal</li>
+                    </ul>
+                </div>
+
             </div>
         </div>
     </section>
+
+    <section id="expertise" class="py-32 px-6 md:px-12 bg-[#030712]/50 border-y border-amber/10">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+            <div class="scroll-up">
+                <span class="text-amber text-[10px] uppercase tracking-widest font-bold block mb-4">The Hook Lift Advantage</span>
+                <h3 class="serif text-4xl md:text-5xl text-white mb-8 leading-tight">Smarter Placement. <br> Safer Loading.</h3>
+                <p class="font-light text-light-gray/70 leading-relaxed mb-6">
+                    Unlike traditional cable roll-off dumpsters, our hook lift systems provide unmatched precision. Our trucks can maneuver into tight alleys, small driveways, and complex construction sites with ease.
+                </p>
+                <p class="font-light text-light-gray/70 leading-relaxed mb-8">
+                    The mechanical arm lifts and places the bin gently, greatly reducing the risk of scratching or cracking your pavement. Plus, all our bins feature rear-opening doors so you can walk heavy items right inside.
+                </p>
+                
+                <div class="space-y-6 mt-10">
+                    <div class="flex items-start gap-4">
+                        <div class="w-8 h-8 rounded-full bg-amber/10 flex items-center justify-center text-amber shrink-0 border border-amber/30">1</div>
+                        <div>
+                            <h5 class="text-white font-medium mb-1">Precision Placement</h5>
+                            <p class="text-xs text-light-gray/60 leading-relaxed">We can drop bins at exact angles and in tighter spots than standard trucks.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-8 h-8 rounded-full bg-amber/10 flex items-center justify-center text-amber shrink-0 border border-amber/30">2</div>
+                        <div>
+                            <h5 class="text-white font-medium mb-1">Driveway Friendly</h5>
+                            <p class="text-xs text-light-gray/60 leading-relaxed">The hook lift gently lowers the bin instead of dragging it across the ground.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-8 h-8 rounded-full bg-amber/10 flex items-center justify-center text-amber shrink-0 border border-amber/30">3</div>
+                        <div>
+                            <h5 class="text-white font-medium mb-1">Walk-In Access</h5>
+                            <p class="text-xs text-light-gray/60 leading-relaxed">Rear swinging doors mean you never have to lift heavy objects over the sides.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="relative scroll-up delay-200">
+                <div class="absolute -inset-4 bg-amber/10 blur-2xl rounded-sm"></div>
+                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=800" alt="Hook lift truck in action" class="relative rounded-sm shadow-2xl border border-amber/20 object-cover aspect-[4/5] w-full">
+            </div>
+        </div>
+    </section>
+
+    <section id="fleet" class="py-32 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6 scroll-up">
+                <div>
+                    <span class="text-amber text-[10px] uppercase tracking-widest font-bold block mb-4">Our Fleet</span>
+                    <h3 class="serif text-4xl md:text-5xl text-white">Available Bin Sizes</h3>
+                </div>
+                <a href="#estimate" class="text-xs font-medium text-amber uppercase tracking-widest hover:text-white transition-colors flex items-center gap-2">
+                    Check Availability <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+                <div class="relative group overflow-hidden rounded-sm aspect-square scroll-up">
+                    <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15f?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="10 Yard Bin">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-metal via-transparent to-transparent opacity-90"></div>
+                    <div class="absolute bottom-6 left-6 right-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                        <h5 class="text-white font-medium mb-1">10 Cubic Yards</h5>
+                        <p class="text-[10px] text-amber uppercase tracking-widest">Small Renovations</p>
+                    </div>
+                </div>
+
+                <div class="relative group overflow-hidden rounded-sm aspect-square scroll-up" style="transition-delay: 100ms;">
+                    <img src="https://images.unsplash.com/photo-1503594384566-461fe158e797?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="15 Yard Bin">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-metal via-transparent to-transparent opacity-90"></div>
+                    <div class="absolute bottom-6 left-6 right-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                        <h5 class="text-white font-medium mb-1">15 Cubic Yards</h5>
+                        <p class="text-[10px] text-amber uppercase tracking-widest">Room Additions</p>
+                    </div>
+                </div>
+
+                <div class="relative group overflow-hidden rounded-sm aspect-square scroll-up" style="transition-delay: 200ms;">
+                    <img src="https://images.unsplash.com/photo-1541888087525-4bc1f26f6eb8?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="20 Yard Bin">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-metal via-transparent to-transparent opacity-90"></div>
+                    <div class="absolute bottom-6 left-6 right-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                        <h5 class="text-white font-medium mb-1">20 Cubic Yards</h5>
+                        <p class="text-[10px] text-amber uppercase tracking-widest">Roofing & Flooring</p>
+                    </div>
+                </div>
+
+                <div class="relative group overflow-hidden rounded-sm aspect-square scroll-up" style="transition-delay: 300ms;">
+                    <img src="https://images.unsplash.com/photo-1530263604323-921eb08d88c2?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="30 Yard Bin">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-metal via-transparent to-transparent opacity-90"></div>
+                    <div class="absolute bottom-6 left-6 right-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                        <h5 class="text-white font-medium mb-1">30 Cubic Yards</h5>
+                        <p class="text-[10px] text-amber uppercase tracking-widest">Major Demolition</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="py-24 px-6 md:px-12 bg-steel/30 border-t border-amber/10">
+        <div class="max-w-7xl mx-auto text-center scroll-up">
+            <i data-lucide="shield-check" class="w-10 h-10 text-amber mx-auto mb-6"></i>
+            <h3 class="serif text-4xl text-white mb-16">Trusted by Contractors and Homeowners</h3>
+
+            <div class="grid md:grid-cols-3 gap-8 text-left">
+                <div class="glass p-8 rounded-xl relative">
+                    <div class="text-amber mb-4 flex">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="font-light text-sm text-light-gray/80 mb-6 italic">"The hook lift system is a game changer. They managed to place a 20 yard bin perfectly in a narrow city driveway without leaving a single scratch on the concrete. Highly recommended."</p>
+                    <p class="text-xs font-bold text-white uppercase tracking-widest">From Marcus Jenkins</p>
+                </div>
+
+                <div class="glass p-8 rounded-xl relative" style="transition-delay: 100ms;">
+                    <div class="text-amber mb-4 flex">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="font-light text-sm text-light-gray/80 mb-6 italic">"We use Ironclad for all our active job sites. Their drivers are always on time, the bins are clean, and the walk-in doors make loading heavy drywall incredibly easy for our crew."</p>
+                    <p class="text-xs font-bold text-white uppercase tracking-widest">From Sarah O'Connor</p>
+                </div>
+
+                <div class="glass p-8 rounded-xl relative" style="transition-delay: 200ms;">
+                    <div class="text-amber mb-4 flex">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="font-light text-sm text-light-gray/80 mb-6 italic">"Clearing out our basement was so much simpler because of their service. The team communicated clearly about drop-off times and picked it up exactly when we requested."</p>
+                    <p class="text-xs font-bold text-white uppercase tracking-widest">From David and Lisa Reed</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="estimate" class="pt-32 pb-12 px-6 md:px-12 bg-[#030712] border-t border-amber/20 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-amber/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-4xl mx-auto text-center mb-20 relative z-10 scroll-up">
+            <h2 class="serif text-5xl md:text-6xl text-white mb-6">Ready to clear the site?</h2>
+            <p class="text-light-gray/60 mb-10 text-lg font-light">Book a drop-off today and keep your project moving forward without delays.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button class="px-8 py-4 bg-amber text-white text-xs font-bold uppercase tracking-widest rounded-sm hover:bg-[#d97706] transition-all">
+                    Schedule a Delivery
+                </button>
+                <button class="px-8 py-4 border border-amber/30 text-amber text-xs font-bold uppercase tracking-widest rounded-sm hover:border-amber transition-all flex items-center justify-center gap-2">
+                    <i data-lucide="phone" class="w-4 h-4"></i> (555) 987-6543
+                </button>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto border-t border-light-gray/10 pt-12 flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">
+            <div class="flex items-center gap-3">
+                <div class="bin-logo scale-75"></div>
+                <span class="text-white tracking-[0.2em] uppercase text-sm font-bold">Ironclad Bins</span>
+            </div>
+            
+            <div class="flex gap-6 text-[10px] uppercase tracking-widest font-bold text-light-gray/50">
+                <a href="#" class="hover:text-amber transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-amber transition-colors">Environmental Compliance</a>
+                <a href="#" class="hover:text-amber transition-colors">Contact</a>
+            </div>
+            
+            <p class="text-[10px] text-light-gray/30 uppercase tracking-[0.2em]">© 2026 Ironclad Hook Lifts. Fully Licensed & Insured.</p>
+        </div>
+    </footer>
 
     <script>
-        // Custom Neon Cursor Logic
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // 1. Anime.js Initial Hero Animation
+        anime.timeline({ easing: 'easeOutExpo' })
+            .add({
+                targets: '.hero-anim',
+                translateY: [40, 0],
+                opacity: [0, 1],
+                delay: anime.stagger(200),
+                duration: 1500,
+                delay: 200
+            });
+
+        // 2. Parallax Image Effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const bg = document.querySelector('.parallax-bg');
+            if(bg) {
+                bg.style.transform = `translateY(${scrolled * 0.4}px) scale(${1.1 + (scrolled * 0.0002)})`;
+            }
+        });
+
+        // 3. Intersection Observer for Scroll Reveals
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    anime({
+                        targets: entry.target,
+                        translateY: [40, 0],
+                        opacity: [0, 1],
+                        duration: 1000,
+                        easing: 'easeOutQuart'
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+        document.querySelectorAll('.scroll-up').forEach(el => observer.observe(el));
+
+        // 4. Amber Dust Cursor Effect (Canvas)
         const cursor = document.getElementById('cursor');
-        document.addEventListener('mousemove', (e) => {
+        const canvas = document.getElementById('cursor-trail');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        window.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
+
+            for(let i = 0; i < 2; i++) {
+                particles.push({
+                    x: e.clientX,
+                    y: e.clientY,
+                    size: Math.random() * 2 + 0.5,
+                    speedX: (Math.random() - 0.5) * 1.5,
+                    speedY: Math.random() * 1.5 + 0.5,
+                    life: 1,
+                    color: `rgba(245, 158, 11,` // Amber RGB
+                });
+            }
         });
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                let p = particles[i];
+                ctx.fillStyle = p.color + p.life + ')';
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = '#f59e0b';
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+                
+                p.x += p.speedX; 
+                p.y += p.speedY; 
+                p.life -= 0.025; 
+                
+                if (p.life <= 0) { 
+                    particles.splice(i, 1); 
+                    i--; 
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
     </script>
 </body>
 </html>
